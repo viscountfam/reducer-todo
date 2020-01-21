@@ -52,7 +52,8 @@ function App() {
           />
           <button
             onClick={() =>
-            dispatch({type: 'NEW_TO_DO', payload: toDoText})}
+            dispatch({type: 'NEW_TO_DO', payload: toDoText})
+            }
             >
               Add New To Do
             </button>
