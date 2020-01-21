@@ -2,7 +2,7 @@
 
  export const initialState = [{
     item: 'Learn about reducers',
-    completed: false,
+    completed: true,
     id: 3892987589
 },
     {
