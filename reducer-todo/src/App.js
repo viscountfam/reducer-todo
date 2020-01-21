@@ -1,0 +1,48 @@
+import React, {useState, useReducer, useEffect} from 'react';
+import {initialState, todoReducer} from './reducers/reducer'
+import Task from './components/task'
+import './App.css';
+
+function App() {
+  const [state, dispatch] = useReducer(todoReducer, initialState);
+  console.log("state after initialization",state);
+  const [toDoList, setToDoList] = useState([...state]);
+  console.log("toDOList after initialiazion", toDoList)
+  const [toDoText, setToDoText] = useState('')
+
+
+    const handleChanges = e => {
+      setToDoText(e.target.value);
+    };
+
+    useEffect(() => {
+      setToDoList([...state])
+    }, [state])
+
+  return (
+    <>
+      <div className="App">
+        <h1>To Do List</h1>
+        <input
+          className="todo-input"
+          type="text"
+          name="todoText"
+          value={toDoText}
+          onChange={handleChanges}
+          />
+          <button
+            onClick={() =>
+            dispatch({type: 'NEW_TO_DO', payload: toDoText})}
+            >
+              Add New To Do
+            </button>
+            {toDoList.map(todo => (
+              <Task key={todo.id} todo={todo}/>
+            ))}
+      </div>
+
+    </>
+  );
+}
+
+export default App;
