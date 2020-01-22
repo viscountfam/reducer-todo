@@ -14,16 +14,17 @@
  }
 
 export const todoReducer = (state, action) => {
+        console.log("state.data in todoReducer", state.data)
     switch(action.type) {
         case 'NEW_TO_DO':
-            console.log("Current state.data", state.data)
+            console.log("state.data in NEW TO DO Reducer", state.data)
             return { data: [...state.data, {
                 item: action.payload,
                 completed: false,
                 id: Date.now()
             }]};
             
-        case 'TO_DO_Completed':
+        case 'TO_DO_COMPLETED':
             const newTodoList = { data:  state.data.map(task => {
                 if(task.id === action.payload) {
                     return {...task,
@@ -33,9 +34,11 @@ export const todoReducer = (state, action) => {
                     return task
                 }
             })}
+            return newTodoList
         case 'FILTER_TO_DO':
-            return state.data.filter(task =>
-                task.completed === false);
+            return { data: state.data.filter(task =>
+                task.completed === false)
+            }
         default:
             return state.data;
     }
